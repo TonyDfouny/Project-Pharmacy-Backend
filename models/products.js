@@ -26,7 +26,7 @@ const ProductSchema = new Schema({
         required: true
     },
     category:CategorySchema,
-    
+
     label: {
         type: String,
         default: ''
@@ -56,6 +56,6 @@ const ProductSchema = new Schema({
 
 
 
-var Dishes = mongoose.model('Dish', dishSchema);
+var Products = mongoose.model('Product', productSchema);
 
-module.exports = Dishes;
+module.exports = Products;
