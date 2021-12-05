@@ -8,7 +8,7 @@ const productRouter = express.Router();
 
 productRouter.use(bodyParser.json());
 
-productsRouter.route('/')
+productRouter.route('/')
 .get((req,res,next) => {
     Products.find({})
     .then((products) => {
@@ -42,7 +42,7 @@ productsRouter.route('/')
     .catch((err) => next(err));    
 });
 
-dishRouter.route('/:productId')
+productRouter.route('/:productId')
 .get((req,res,next) => {
     Products.findById(req.params.productId)
     .then((product) => {

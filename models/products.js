@@ -4,18 +4,18 @@ require('mongoose-currency').loadType(mongoose);
 const Currency = mongoose.Types.Currency;
 
 
-const CategorySchema = new Schema({
+/*const categorySchema = new Schema({
     description: {
         type: String,
         required: true,
-        unique: true
+        
     },
 }, {
     timestamps: true
-});
+});*/
 
 
-const ProductSchema = new Schema({
+const productSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -23,18 +23,21 @@ const ProductSchema = new Schema({
     },
     image: {
         type: String,
-        required: true
+        required: false
     },
-    category:CategorySchema,
+    category:{
+        type: String,
+        required:true
+    },
 
     label: {
         type: String,
         default: ''
     },
     price: {
-        type: Currency,
+        type: Number,
         required: true,
-        min: 0
+        min: 0.0
     },
     description: {
         type: String,
@@ -46,7 +49,7 @@ const ProductSchema = new Schema({
     },
     quantity:  {
         type: Number,
-        min: 1,
+        min: 0,
         required: true
     },
 }, {

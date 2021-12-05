@@ -1,5 +1,5 @@
 {
-  "name": "project-pharmacy-backend",
+  "name": "pharmabackend",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -11,6 +11,21 @@
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
+    "mongoose": "^5.1.7",
+    "mongoose-currency": "^0.2.0",
     "morgan": "~1.9.0"
-  }
+  },
+  "description": "",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TonyDfouny/Project-Pharmacy-Backend.git"
+  },
+  "author": "Tony",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TonyDfouny/Project-Pharmacy-Backend/issues"
+  },
+  "homepage": "https://github.com/TonyDfouny/Project-Pharmacy-Backend#readme"
 }
