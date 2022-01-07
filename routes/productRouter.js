@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const authenticate = require('../authenticate');
 
 const Products = require('../models/products');
 
@@ -18,7 +19,7 @@ productRouter.route('/')
     }, (err) => next(err))
     .catch((err) => next(err));
 })
-.post((req, res, next) => {
+.post(authenticate.verifyUser,(req, res, next) => {
     Products.create(req.body)
     .then((product) => {
         console.log('Product Created ', product);
@@ -28,11 +29,11 @@ productRouter.route('/')
     }, (err) => next(err))
     .catch((err) => next(err));
 })
-.put((req, res, next) => {
+.put(authenticate.verifyUser,(req, res, next) => {
     res.statusCode = 403;
     res.end('PUT operation not supported on /products');
 })
-.delete((req, res, next) => {
+.delete(authenticate.verifyUser,(req, res, next) => {
     Products.remove({})
     .then((resp) => {
         res.statusCode = 200;
@@ -52,11 +53,11 @@ productRouter.route('/:productId')
     }, (err) => next(err))
     .catch((err) => next(err));
 })
-.post((req, res, next) => {
+.post(authenticate.verifyUser,(req, res, next) => {
     res.statusCode = 403;
     res.end('POST operation not supported on /products/'+ req.params.productId);
 })
-.put((req, res, next) => {
+.put(authenticate.verifyUser,(req, res, next) => {
     Products.findByIdAndUpdate(req.params.productId, {
         $set: req.body
     }, { new: true })
@@ -67,7 +68,7 @@ productRouter.route('/:productId')
     }, (err) => next(err))
     .catch((err) => next(err));
 })
-.delete((req, res, next) => {
+.delete(authenticate.verifyUser,(req, res, next) => {
     Products.findByIdAndRemove(req.params.productId)
     .then((resp) => {
         res.statusCode = 200;
