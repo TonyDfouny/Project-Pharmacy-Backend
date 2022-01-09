@@ -16,6 +16,11 @@ const Currency = mongoose.Types.Currency;
 
 
 const productSchema = new Schema({
+    id:{
+        type:Number,
+        required:true,
+        unique:true
+    },
     name: {
         type: String,
         required: true,
@@ -26,7 +31,7 @@ const productSchema = new Schema({
         required: false
     },
     category:{
-        type: String,
+        type: Number,
         required:true
     },
 

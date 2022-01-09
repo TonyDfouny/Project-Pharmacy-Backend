@@ -16,7 +16,12 @@ var config = require('./config');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var productRouter = require('./routes/productRouter');
+var categoryRouter = require('./routes/categoryRouter');
+
+var messageRouter = require('./routes/messageRouter');
 var uploadRouter = require('./routes/uploadRouter');
+var orderRouter = require('./routes/orderRouter');
+var prodorderRouter = require('./routes/prodorderRouter');
 
 const mongoose = require('mongoose');
 
@@ -58,13 +63,19 @@ app.use(passport.initialize());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
+app.use('/products',productRouter);
+app.use('/categories',categoryRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/products',productRouter);
+
+
 app.use('/imageUpload',uploadRouter);
 
+app.use('/messages',messageRouter);
+
+app.use('/orders',orderRouter);
+app.use('/prodorder',prodorderRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
