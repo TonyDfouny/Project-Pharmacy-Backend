@@ -5,30 +5,22 @@ const Currency = mongoose.Types.Currency;
 
 
 const prodorderSchema = new Schema({
-    id:{
-        type:Number,
-        required:true,
-        unique:true
-    },
+    
     orderId:{
-        type:Number,
-        required:true,
-        unique:true
+        type:String,
+        
     },
     productId:{
-        type:Number,
-        required:true,
-        unique:true
+        type:String,
+        
     },
     productPrice:{
         type:Number,
-        required:true,
-        unique:true
+        
     },
     quantity:{
         type:Number,
-        required:true,
-        unique:true
+        
     },
 }, {
     timestamps: true

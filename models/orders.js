@@ -5,13 +5,9 @@ const Currency = mongoose.Types.Currency;
 
 
 const orderSchema = new Schema({
-    id:{
-        type:Number,
-        required:true,
-        unique:true
-    },
+    
     userId:{
-        type:Number,
+        type:String,
 
     },
     city: {
@@ -25,19 +21,19 @@ const orderSchema = new Schema({
     floor:   {
         type: Number
     },
-    contactmethode:{
+    contactMethode:{
         type:String,
-        required:true
+        
     },
     addComments: {
         type: String,
-        required: true,
+        
     },
     date:{
         type:String,
-        required: true
+        
     },
-    totalprice:{
+    totalPrice:{
         type:Number,
     },
 }, {

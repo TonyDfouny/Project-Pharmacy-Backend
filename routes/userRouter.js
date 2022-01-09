@@ -1,44 +1,44 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-//const authenticate = require('../authenticate');
+
 const cors = require('./cors');
-const Categories = require('../models/categories');
+const Users = require('../models/users');
 
-const categoryRouter = express.Router();
+const userRouter = express.Router();
 
-categoryRouter.use(bodyParser.json());
+userRouter.use(bodyParser.json());
 
-categoryRouter.route('/')
+userRouter.route('/')
 .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
 .get(cors.cors,(req,res,next) => {
-    Categories.find(req.query)
-    .then((categories) => {
+    Users.find(req.query)
+    
+    .then((users) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin','*');
-        res.json(categories);
+        res.json(users);
     }, (err) => next(err))
     .catch((err) => next(err));
 })
-
 .post(cors.corsWithOptions,/*authenticate.verifyUser,*/(req, res, next) => {
-    Categories.create(req.body)
-    .then((categorie) => {
-        console.log('categorie Created ', categorie);
+    Users.create(req.body)
+    .then((user) => {
+        console.log('User Created ', user);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin','*');
-        res.json(categorie);
+        res.json(user);
     }, (err) => next(err))
     .catch((err) => next(err));
 })
 .put(cors.corsWithOptions,/*authenticate.verifyUser,*/(req, res, next) => {
     res.statusCode = 403;
-    res.end('PUT operation not supported on /categories');
+    res.end('PUT operation not supported on /users');
 })
-.delete(/*authenticate.verifyUser,*/(req, res, next) => {
-    Categories.remove({})
+.delete(cors.corsWithOptions,/*authenticate.verifyUser,*/(req, res, next) => {
+    Users.remove({})
     .then((resp) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -48,46 +48,47 @@ categoryRouter.route('/')
     .catch((err) => next(err));    
 });
 
-
-categoryRouter.route('/:categoryId')
+userRouter.route('/:userId')
 .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
 .get(cors.cors,(req,res,next) => {
-    Categories.findById(req.params.categoryId)
-    .then((category) => {
+    Users.findById(req.params.userId)
+    .then((user) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin','*');
-        res.json(category);
+        res.json(user);
     }, (err) => next(err))
     .catch((err) => next(err));
 })
 .post(cors.corsWithOptions,/*authenticate.verifyUser,*/(req, res, next) => {
     res.statusCode = 403;
-    res.end('POST operation not supported on /categories/'+ req.params.categoryId);
+    res.end('POST operation not supported on /users/'+ req.params.userId);
 })
 .put(cors.corsWithOptions,/*authenticate.verifyUser,*/(req, res, next) => {
-    Categories.findByIdAndUpdate(req.params.categoryId, {
+    Users.findByIdAndUpdate(req.params.userId, {
         $set: req.body
     }, { new: true })
-    .then((category) => {
+    .then((user) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin','*');
-        res.json(category);
+        res.json(user);
     }, (err) => next(err))
     .catch((err) => next(err));
 })
 .delete(cors.corsWithOptions,/*authenticate.verifyUser,*/(req, res, next) => {
-    //console.log("testttttt")
-    Categories.findByIdAndRemove(req.params.categoryId)
+    
+    Users.findByIdAndRemove(req.params.userId)
     .then((resp) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        //res.setHeader('Access-Control-Allow-Origin','*');
+        res.setHeader('Access-Control-Allow-Origin','*');
         res.json(resp);
     }, (err) => next(err))
     .catch((err) => next(err));
-});
+}); 
 
 
-module.exports = categoryRouter;
+
+
+module.exports = userRouter;

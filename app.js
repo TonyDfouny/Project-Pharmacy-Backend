@@ -8,15 +8,16 @@ var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 
 var passport = require('passport');
-var authenticate = require('./authenticate');
+//var authenticate = require('./authenticate');
 var config = require('./config');
 
 
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+//var usersRouter = require('./routes/users');
 var productRouter = require('./routes/productRouter');
 var categoryRouter = require('./routes/categoryRouter');
+var userRouter = require('./routes/userRouter');
 
 var messageRouter = require('./routes/messageRouter');
 var uploadRouter = require('./routes/uploadRouter');
@@ -62,13 +63,16 @@ app.use(passport.initialize());
 
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//app.use('/users', usersRouter);
 app.use('/products',productRouter);
 app.use('/categories',categoryRouter);
 
+app.use('/users',userRouter);
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+//app.use(express.json({limit: '50mb'}));
+//app.use(express.urlencoded({limit: '50mb'}));
 
 app.use('/imageUpload',uploadRouter);
 

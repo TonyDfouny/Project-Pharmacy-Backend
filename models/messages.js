@@ -5,11 +5,11 @@ const Currency = mongoose.Types.Currency;
 
 
 const messageSchema = new Schema({
-    firstname: {
+    firstName: {
         type: String,
           default: ''
       },
-    lastname: {
+    lastName: {
         type: String,
           default: ''
       },
@@ -26,23 +26,19 @@ const messageSchema = new Schema({
         type: Boolean,
         default: false
     },
-    contactmethode:{
+    contactMethode:{
         type:String,
-        required:true
+        
     },
     message: {
         type: String,
-        required: true,
+        
     },
     date:{
         type:String,
         required: true
     },
-    id:{
-        type:Number,
-        required:true,
-        unique:true
-    },
+    
 }, {
     timestamps: true
 });
